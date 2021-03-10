@@ -12,7 +12,6 @@ function PostList() {
   }, []);
   return (
     <>
-      Postlist
       {postList.map((post) => (
         <Post key={post.id} post={post} />
       ))}

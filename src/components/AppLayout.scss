@@ -1,0 +1,22 @@
+.app {
+  width: 1024px;
+  margin: 0 auto;
+  max-width: 90%;
+  // background-color: lightyellow;
+  // border: 3px solid #333;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-areas:
+    "header header header"
+    "contents contents sidebar"
+    "footer footer footer";
+  gap: 1rem;
+
+  .sidebar {
+    grid-area: sidebar;
+  }
+
+  .contents {
+    grid-area: contents;
+  }
+}

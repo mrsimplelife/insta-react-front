@@ -1,5 +1,7 @@
+import PostList from "components/PostLIst";
+
 function Home() {
-  return <div>Home</div>;
+  return <PostList />;
 }
 
 export default Home;
