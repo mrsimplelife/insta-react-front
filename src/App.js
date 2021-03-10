@@ -1,6 +1,10 @@
-import styles from "App.module.scss";
+import PostList from "PostLIst";
 function App() {
-  return <div>hi</div>;
+  return (
+    <>
+      <PostList />
+    </>
+  );
 }
 
 export default App;
