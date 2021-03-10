@@ -5,10 +5,10 @@ import Axios from "axios";
 import { useAppContext } from "store";
 import { setToken } from "store";
 
-export default function Login() {
+export default function Login({ location, history }) {
   const [fieldErrors, setFieldErrors] = useState({});
   const { dispatch } = useAppContext();
-
+  const { from: loginRedirectUrl = "/" } = location.state || {};
   const onFinish = (values) => {
     async function fn() {
       const { username, password } = values;
@@ -31,6 +31,7 @@ export default function Login() {
           message: "로그인 성공",
           icon: <SmileOutlined style={{ color: "#108ee9" }} />,
         });
+        history.push(loginRedirectUrl);
       } catch (error) {
         if (error.response) {
           notification.open({
@@ -60,6 +61,9 @@ export default function Login() {
 
   return (
     <Card title="로그인">
+      {JSON.stringify(loginRedirectUrl)}
+      <hr />
+      {JSON.stringify(location)}
       <Form {...layout} onFinish={onFinish} autoComplete={"false"}>
         <Form.Item
           label="Username"
