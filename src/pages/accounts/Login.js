@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Card, Form, Input, Button, notification } from "antd";
 import { SmileOutlined, FrownOutlined } from "@ant-design/icons";
-import Axios from "axios";
+import { axiosInstance } from "api";
 import { useAppContext } from "store";
 import { setToken } from "store";
 import { parseErrorMessages } from "utils/forms";
@@ -18,10 +18,7 @@ export default function Login({ location, history }) {
 
       const data = { username, password };
       try {
-        const response = await Axios.post(
-          "http://localhost:8000/accounts/token/",
-          data
-        );
+        const response = await axiosInstance.post("/accounts/token/", data);
         const {
           data: { token },
         } = response;

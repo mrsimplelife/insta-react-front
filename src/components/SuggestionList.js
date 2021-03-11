@@ -1,9 +1,8 @@
 import { Button, Card } from "antd";
 import Suggestion from "./Suggestion";
 import { useAppContext } from "store";
-import useAxios from "axios-hooks";
+import { useAxios, axiosInstance } from "api";
 import { useEffect, useState } from "react";
-import axios from "axios";
 
 export default function SuggestionList({ style }) {
   const {
@@ -15,7 +14,7 @@ export default function SuggestionList({ style }) {
   const [userList, setUserList] = useState([]);
 
   const [{ data: origUserList, loading, error }, refetch] = useAxios({
-    url: "http://localhost:8000/accounts/suggestions/",
+    url: "/accounts/suggestions/",
     headers,
   });
   useEffect(() => {
@@ -26,8 +25,8 @@ export default function SuggestionList({ style }) {
   const onFollowUser = (username) => {
     const data = { username };
     const config = { headers };
-    axios
-      .post("http://localhost:8000/accounts/follow/", data, config)
+    axiosInstance
+      .post("/accounts/follow/", data, config)
       .then((response) => {
         setUserList((prevUserList) =>
           prevUserList.map((user) =>
