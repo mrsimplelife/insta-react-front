@@ -4,6 +4,7 @@ import { SmileOutlined, FrownOutlined } from "@ant-design/icons";
 import Axios from "axios";
 import { useAppContext } from "store";
 import { setToken } from "store";
+import { parseErrorMessages } from "utils/forms";
 
 export default function Login({ location, history }) {
   const [fieldErrors, setFieldErrors] = useState({});
@@ -41,18 +42,7 @@ export default function Login({ location, history }) {
           });
 
           const { data: fieldsErrorMessages } = error.response;
-          setFieldErrors(
-            Object.entries(fieldsErrorMessages).reduce(
-              (acc, [fieldName, errors]) => {
-                acc[fieldName] = {
-                  validateStatus: "error",
-                  help: errors.join(" "),
-                };
-                return acc;
-              },
-              {}
-            )
-          );
+          setFieldErrors(parseErrorMessages(fieldsErrorMessages));
         }
       }
     }

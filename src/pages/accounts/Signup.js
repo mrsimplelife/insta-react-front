@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Form, Input, Button, notification } from "antd";
 import { SmileOutlined, FrownOutlined } from "@ant-design/icons";
 import axios from "axios";
+import { parseErrorMessages } from "utils/forms";
 
 export default function Signup({ history }) {
   // const history = useHistory();
@@ -32,19 +33,7 @@ export default function Signup({ history }) {
         const { data: fieldsErrorMessages } = error.response;
         // fieldsErrorMessages => { username: "m1 m2", password: [] }
         // python: mydict.items()
-        setFieldErrors(
-          Object.entries(fieldsErrorMessages).reduce(
-            (acc, [fieldName, errors]) => {
-              // errors : ["m1", "m2"].join(" ") => "m1 "m2"
-              acc[fieldName] = {
-                validateStatus: "error",
-                help: errors.join(" "),
-              };
-              return acc;
-            },
-            {}
-          )
-        );
+        setFieldErrors(parseErrorMessages(fieldsErrorMessages));
       }
     }
   };
