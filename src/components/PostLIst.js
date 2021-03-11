@@ -14,7 +14,7 @@ function PostList() {
 
   const headers = { Authorization: `JWT ${jwtToken}` };
 
-  const [{ data: originPostList, loading, error }, refetch] = useAxios({
+  const [{ data: originPostList }] = useAxios({
     url: apiUrl,
     headers,
   });
@@ -27,7 +27,7 @@ function PostList() {
     const method = isLike ? "POST" : "DELETE";
 
     try {
-      const response = await axios({
+      await axios({
         url: apiUrl,
         method,
         headers,

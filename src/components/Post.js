@@ -1,10 +1,11 @@
 import { Avatar, Card } from "antd";
 import { HeartOutlined, HeartTwoTone } from "@ant-design/icons";
+import CommentList from "./CommentList";
 
 function Post({ post, handleLike }) {
-  const { author, caption, location, photo, tag_set, is_like } = post;
+  const { author, caption, location, photo, is_like } = post;
 
-  const { username, name, avatar_url } = author;
+  const { username, avatar_url } = author;
 
   return (
     <div>
@@ -36,7 +37,9 @@ function Post({ post, handleLike }) {
           }
           title={location}
           description={caption}
+          style={{ marginBottom: "0.5em" }}
         />
+        <CommentList post={post} />
       </Card>
     </div>
   );
